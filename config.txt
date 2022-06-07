@@ -1,0 +1,80 @@
+Step we have to follow:
+-vue js laravel website develloppement : 
+
+ ==============
+features of the site we are going to develop are
+
+1: complete SPA admin panel
+2: Hybrid Blog front en (Vue spa + blade)
+3 SEO optimized for important pages
+4: Uer authentication for blog comment and reply
+5: social login for users
+6: Category and tags
+7:Search for blog
+8:Editor.js for writing blog ( apowerful tool for rich text editor)
+
+==================
+Topics we are going to cover for laravel
+-Route
+-Model
+-View
+-controller
+-Query
+-Middlware
+-Authentication
+-relationships
+-Email sending
+-Account /password recovery
+
+
+
+================
+
+Topics we are going to cover for Vue.js
+
+Vue router
+vuex
+Components
+Mixin
+Methods
+Hooks
+Filters
+iView Ui
+Computed
+Data function
+Two-way binding
+Axios 
+Vue conditions 
+Vue loops
+Vue editor.js
+
+
+
+first explanation:
+
+a.user visits test.localhost/testpage -> it loads web.php file and try to find a match -> (if not match found ) it returns 404 not found , (if match found ) we then call a controller class and then a method of it 
+
+
+2- user visitts localhost.:.../testpage ==> it loads wep.php file and try to find a match => it calls a method of a controller => method just return  json Data => if not it then use spa route which is known as any route in Laravel => any route and then call a controller's method => the method returns a view , in our case ,test.blage.php => In test.blade.php we then load Vue.js component => this vue container load a vue router =>vue router tries to find a match for "testpage route" => Vue route then load a Vue component
+
+3-vue entrypoint is in ressource => js app.js
+
+
+4config webpack to relate vue and laravel
+
+
+https://laravel-mix.com/docs/5.0/copying-files
+
+
+Model name ===> blog
+table name ===> blogs
+foreign key ====> blog_id
+
+
+1-theming
+
+2new with app
+3laravel websocket , create real time chat
+
+
+validate in laravel

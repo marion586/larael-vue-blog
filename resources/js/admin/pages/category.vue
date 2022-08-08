@@ -96,14 +96,14 @@
 				:closable="false"
 				:draggable="true"
 				>
-				  <Input v-model="data.categoryName " placeholder="Add category name"  />
+				  <Input v-model="data.categoryName " placeholder="Add category name"  />yqnr 
 
 				  <div class="space">
 
 				  </div>
 
 
-				<Upload
+				<Upload v-show="isIconImageNew"
 						ref="uploads"
 						type="drag"
 						:headers = "{'x-csrf-token' : token ,'X-Requested-With':'XMLHttpRequest'}"
@@ -177,7 +177,8 @@ export default {
 			deleteItem: {},
 			deleteIndex: 0,
 			isDeleting : false,
-			token: ''
+			token: '',
+			isIconImageNew: false
 		}
 	},
 	methods : {
@@ -186,7 +187,7 @@ export default {
 			if(this.data.categoryName.trim()== '') return this.e("Category name is required");
 			 if(this.data.iconImage.trim()== '') return this.e("Icon image is required");
 			 this.data.iconImage = `/uploads/${this.data.iconImage}`;
-			const res = await this.$callApi('post' , 'http://blog-laravue.host/app/create_category' , this.data);
+			const res = await this.$callApi('post' , 'app/create_category' , this.data);
 			
 			console.log(res)
 			if(res.status === 201) {
@@ -217,7 +218,7 @@ export default {
 		},
 		async editTag(){
 			 if(this.editData.tagName.trim()== '') return this.e("Tag name is required ");
-			const res = await this.$callApi('post' , 'http://blog-laravue.host/app/edit_tag' , this.editData)
+			const res = await this.$callApi('post' , 'app/edit_tag' , this.editData)
 			
 			if(res.status === 200) {
 				this.s('tag has been edited successfully')
@@ -243,7 +244,7 @@ export default {
 			this.isDeleting = true
 			// if(!confirm('are you sure want to delete this tag ?')) return this.$set(tag,'isDeleting' ,true)
 			// use this allow you to add a new property which does not exist before the 
-			const res = await this.$callApi('post' , 'http://blog-laravue.host/app/delete_tag' ,this.deleteItem);
+			const res = await this.$callApi('post' , 'app/delete_tag' ,this.deleteItem);
 
 			if(res.status === 200){
 				this.tags.splice(this.deleteIndex ,1)
@@ -271,7 +272,7 @@ export default {
 			this.editIndex = i
 		},
 		async getTag() {
-			const res = await this.$callApi('get' , 'http://blog-laravue.host/app/get_category' );
+			const res = await this.$callApi('get' , 'app/get_category' );
 			if(res.status == 200) {
 				this.categoryLits = res.data;
 			}

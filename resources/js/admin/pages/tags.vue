@@ -67,7 +67,7 @@
 
 				<div slot="footer">
 					<Button type="default" @click="editModal = false"> close</Button>
-					<Button type="primary" @click="editTag" :disabled="isAdding" :loading="isAdding"> {{isAdding ? 'editing ...' : 'Adit tag'}}</Button>
+					<Button type="primary" @click="editag" :disabled="isAdding" :loading="isAdding"> {{isAdding ? 'Adding ...' : 'Add tag'}}</Button>
 				</div>
 			</Modal>
 
@@ -119,7 +119,7 @@ export default {
 		async addTag(){
 			this.addModal = false
 			// if(this.data.tagName.trim()== '') return this.e();
-			const res = await this.$callApi('post' , 'http://blog-laravue.host/app/create_tag' , this.data)
+			const res = await this.$callApi('post' , 'app/create_tag' , this.data)
 			
 			if(res.status === 201) {
 				this.s('tag has been added successfully')
@@ -141,14 +141,15 @@ export default {
 				}
 			}
 		},
-		async editTag(){
+		async editag() {
+			
 			 if(this.editData.tagName.trim()== '') return this.e("Tag name is required ");
-			const res = await this.$callApi('post' , 'http://blog-laravue.host/app/edit_tag' , this.editData)
+			const res = await this.$callApi('post' , 'app/edit_tag' , this.editData)
 			
 			if(res.status === 200) {
 				this.s('tag has been edited successfully')
 				this.editModal = false;
-				this.tags[this.index].tagName = this.editData.tagName;
+				this.tags[this.editIndex].tagName = this.editData.tagName;
 				// this.getTag();
 			}
 			else {
@@ -169,7 +170,7 @@ export default {
 			this.isDeleting = true
 			// if(!confirm('are you sure want to delete this tag ?')) return this.$set(tag,'isDeleting' ,true)
 			// use this allow you to add a new property which does not exist before the 
-			const res = await this.$callApi('post' , 'http://blog-laravue.host/app/delete_tag' ,this.deleteItem);
+			const res = await this.$callApi('post' , 'app/delete_tag' ,this.deleteItem);
 
 			if(res.status === 200){
 				this.tags.splice(this.deleteIndex ,1)
@@ -192,12 +193,12 @@ export default {
 				id : tag.id,
 				tagName : tag.tagName
 			}
-			this.editTag = i
+			this.editIndex = i
 			this.editModal = true;
 			this.editData= obj;
 		},
 		async getTag() {
-			const res = await this.$callApi('get' , 'http://blog-laravue.host/app/get_tags' );
+			const res = await this.$callApi('get' , 'app/get_tags' );
 			if(res.status == 200) {
 				this.tags = res.data;
 			}
